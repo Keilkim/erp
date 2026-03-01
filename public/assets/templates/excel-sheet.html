@@ -1,0 +1,68 @@
+<div class="excel-sheet" id="excel-sheet">
+  <!-- Toolbar -->
+  <div class="excel-sheet__toolbar">
+    <div class="excel-sheet__toolbar-group">
+      <button class="btn btn--outline btn--sm" id="btn-add-row"
+              title="행 추가">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+        행 추가
+      </button>
+      <button class="btn btn--outline btn--sm" id="btn-add-col"
+              title="열 추가">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+        열 추가
+      </button>
+    </div>
+    <div class="excel-sheet__toolbar-divider"></div>
+    <span class="excel-sheet__file-name" id="current-file-name">
+      파일을 선택하세요
+    </span>
+    <div class="excel-sheet__toolbar-divider"></div>
+    <div class="excel-sheet__toolbar-group">
+      <button class="btn btn--outline btn--sm" id="btn-undo"
+              title="되돌리기">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2">
+          <polyline points="1 4 1 10 7 10"></polyline>
+          <path d="M3.51 15a9 9 0 102.13-9.36L1 10"></path>
+        </svg>
+      </button>
+      <button class="btn btn--outline btn--sm" id="btn-redo"
+              title="다시 실행">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2">
+          <polyline points="23 4 23 10 17 10"></polyline>
+          <path d="M20.49 15a9 9 0 11-2.13-9.36L23 10"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Table Area -->
+  <div class="excel-sheet__table-wrap" id="excel-table-wrap">
+    <div class="excel-sheet__empty" id="excel-empty-state">
+      <span class="excel-sheet__empty-icon">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="3" y1="9" x2="21" y2="9"></line>
+          <line x1="3" y1="15" x2="21" y2="15"></line>
+          <line x1="9" y1="3" x2="9" y2="21"></line>
+          <line x1="15" y1="3" x2="15" y2="21"></line>
+        </svg>
+      </span>
+      <span class="excel-sheet__empty-title">엑셀 시트</span>
+      <span class="excel-sheet__empty-desc">
+        왼쪽에서 파일을 선택하거나 AI 채팅으로 데이터를 생성하세요
+      </span>
+    </div>
+  </div>
+</div>

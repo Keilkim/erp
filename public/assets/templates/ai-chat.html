@@ -1,0 +1,53 @@
+<div class="ai-chat" id="ai-chat">
+  <!-- Header -->
+  <div class="panel__header">
+    <span class="panel__title">AI 채팅</span>
+    <button class="btn btn--outline btn--sm" id="btn-clear-chat">초기화</button>
+  </div>
+
+  <!-- Messages -->
+  <div class="ai-chat__messages" id="chat-messages">
+    <div class="ai-chat__welcome">
+      <span class="ai-chat__welcome-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1">
+          <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"></path>
+        </svg>
+      </span>
+      <span class="ai-chat__welcome-title">AI 어시스턴트</span>
+      <span class="ai-chat__welcome-desc">
+        엑셀 데이터 분석, 수정, 생성을 도와드립니다.
+        프롬프트를 입력해보세요.
+      </span>
+    </div>
+  </div>
+
+  <!-- Input Area -->
+  <div class="ai-chat__input-area">
+    <div class="ai-chat__input-row">
+      <textarea class="ai-chat__input" id="chat-input"
+                placeholder="메시지를 입력하세요..."
+                rows="1"></textarea>
+      <button class="ai-chat__send-btn" id="btn-send-chat"
+              disabled title="전송">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </div>
+    <span class="ai-chat__hint">Enter로 전송, Shift+Enter로 줄바꿈</span>
+  </div>
+
+  <!-- Wizard Bar -->
+  <div class="ai-chat__wizard-bar">
+    <button class="ai-chat__wizard-btn" id="btn-ai-wizard">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" style="vertical-align: middle;">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+      </svg>
+      AI 마법사
+    </button>
+  </div>
+</div>

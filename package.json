@@ -1,0 +1,21 @@
+{
+  "name": "company-erp",
+  "version": "1.0.0",
+  "description": "회사 전용 ERP 시스템 - Vercel + Supabase",
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static site - no build step'",
+    "lint:lines": "node scripts/check-line-limit.js",
+    "lint:inline": "node scripts/check-no-inline.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0"
+  },
+  "devDependencies": {
+    "vercel": "^37.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

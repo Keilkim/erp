@@ -1,0 +1,60 @@
+<div class="layout">
+  <!-- Header -->
+  <header class="layout__header">
+    <div class="layout__logo">
+      <svg class="layout__logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+        <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+        <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+        <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+      </svg>
+      <span>ERP System</span>
+    </div>
+    <div class="layout__actions">
+      <button class="btn btn--primary" id="btn-upload">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path>
+          <polyline points="17 8 12 3 7 8"></polyline>
+          <line x1="12" y1="3" x2="12" y2="15"></line>
+        </svg>
+        업로드
+      </button>
+      <button class="btn btn--primary" id="btn-save-excel">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"></path>
+          <polyline points="17 21 17 13 7 13 7 21"></polyline>
+          <polyline points="7 3 7 8 15 8"></polyline>
+        </svg>
+        저장
+      </button>
+    </div>
+  </header>
+
+  <!-- Body -->
+  <div class="layout__body">
+    <!-- Left Sidebar -->
+    <aside class="layout__sidebar-left">
+      <div class="tab-switcher">
+        <button class="tab-switcher__tab tab-switcher__tab--active"
+                data-tab="temp">임시저장</button>
+        <button class="tab-switcher__tab"
+                data-tab="final">최종본</button>
+      </div>
+      <div id="sidebar-content"></div>
+    </aside>
+
+    <!-- Center Content -->
+    <main class="layout__center">
+      <div id="excel-sheet-container"></div>
+      <div id="checklist-container"></div>
+    </main>
+
+    <!-- Right Sidebar (AI Chat) -->
+    <aside class="layout__sidebar-right">
+      <div id="ai-chat-container"></div>
+    </aside>
+  </div>
+</div>
+
+<!-- Modal Container -->
+<div id="modal-container"></div>
