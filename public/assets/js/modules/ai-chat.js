@@ -96,8 +96,12 @@ var AiChat = (function () {
       sampleRows: excelData.rows.slice(0, 5)
     };
 
+    addMessage('ai', '...', [], true);
+
     try {
       var result = await ApiClient.sendChatMessage(text, context);
+
+      removeLoadingMessage();
 
       if (result.success && result.data) {
         addMessage('ai', result.data.message);
@@ -109,80 +113,37 @@ var AiChat = (function () {
           });
         }
       } else {
-        addAiMockResponse(text, excelData);
+        var errMsg = (result.error) ? result.error : '응답 처리 실패';
+        addMessage('ai', 'API 오류: ' + errMsg);
       }
     } catch (err) {
-      addAiMockResponse(text, excelData);
+      removeLoadingMessage();
+      addMessage('ai', '네트워크 오류: ' + err.message);
     }
   }
 
   /**
-   * 모의 AI 응답 (API 미연결 시)
+   * 로딩 메시지 제거
    */
-  function addAiMockResponse(userText, excelData) {
-    var response = generateMockResponse(userText, excelData);
-    addMessage('ai', response.message, response.actions);
-
-    if (response.excelData) {
-      Utils.eventBus.emit('ai:data-generated', response.excelData);
-    }
-  }
-
-  /**
-   * 모의 응답 생성
-   */
-  function generateMockResponse(text, excelData) {
-    var lower = text.toLowerCase();
-
-    if (lower.includes('샘플') || lower.includes('생성')) {
-      return {
-        message: '샘플 데이터를 생성했습니다. ' +
-          '엑셀 시트에서 확인해주세요.',
-        excelData: {
-          headers: ['이름', '부서', '직급', '입사일', '급여'],
-          rows: [
-            ['김철수', '개발팀', '과장', '2020-03-15', '5500000'],
-            ['이영희', '기획팀', '대리', '2021-07-01', '4200000'],
-            ['박민수', '영업팀', '차장', '2018-11-20', '6800000'],
-            ['정수진', '인사팀', '사원', '2023-01-10', '3500000'],
-            ['최동현', '개발팀', '부장', '2015-05-08', '8000000']
-          ]
-        }
-      };
-    }
-
-    if (lower.includes('분석') || lower.includes('요약')) {
-      if (excelData.headers.length > 0) {
-        return {
-          message: '현재 엑셀 데이터 분석 결과입니다:\n\n' +
-            '- 총 ' + excelData.rows.length + '개의 행\n' +
-            '- ' + excelData.headers.length + '개의 열 (' +
-            excelData.headers.join(', ') + ')\n\n' +
-            '추가 분석이 필요하시면 말씀해주세요.'
-        };
+  function removeLoadingMessage() {
+    if (messages.length > 0) {
+      var last = messages[messages.length - 1];
+      if (last.isLoading) {
+        messages.pop();
       }
-      return {
-        message: '분석할 엑셀 데이터가 없습니다. ' +
-          '파일을 업로드하거나 "샘플 데이터 생성"을 요청해주세요.'
-      };
     }
-
-    return {
-      message: '네, 요청을 확인했습니다. "샘플 데이터 생성", ' +
-        '"데이터 분석" 등의 명령어를 사용해보세요.\n\n' +
-        '현재 AI 서버가 연결되지 않아 모의 응답입니다.'
-    };
   }
 
   /**
    * 메시지 추가 및 렌더링
    */
-  function addMessage(role, text, actions) {
+  function addMessage(role, text, actions, isLoading) {
     messages.push({
       id: Utils.generateId(),
       role: role,
       text: text,
       actions: actions || [],
+      isLoading: isLoading || false,
       timestamp: new Date().toISOString()
     });
     renderMessages();
@@ -229,7 +190,9 @@ var AiChat = (function () {
   function buildMessageHtml(msg) {
     var roleClass = msg.role === 'user' ? 'user' : 'ai';
     var avatar = msg.role === 'user' ? 'U' : 'AI';
-    var bodyText = Utils.escapeHtml(msg.text).replace(/\n/g, '<br>');
+    var bodyText = msg.isLoading
+      ? '<span class="chat-message__loading">AI 응답 생성 중...</span>'
+      : Utils.escapeHtml(msg.text).replace(/\n/g, '<br>');
 
     var actionsHtml = '';
     if (msg.actions && msg.actions.length > 0) {
